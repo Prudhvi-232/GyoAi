@@ -34,12 +34,7 @@ class _TopPageState extends State<TopPage> {
                     borderRadius:
                         BorderRadius.only(bottomRight: Radius.circular(70)),
                   ),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/1.jpg',
-                      scale: 0.8,
-                    ),
-                  ),
+                  child: Image(image: AssetImage('assets/one.jpg')),
                 ),
               ],
             ),
