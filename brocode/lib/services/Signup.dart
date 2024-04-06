@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hacking/services/Signup.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _SignupState extends State<Signup> {
   late TextEditingController textEditingController1;
   late TextEditingController textEditingController2;
-
   @override
   void initState() {
     super.initState();
     textEditingController1 = TextEditingController();
     textEditingController2 = TextEditingController();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +44,25 @@ class _ProfilePageState extends State<ProfilePage> {
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white), // Border color
                   ),
-                  hintText: 'Enter the name',
+                  hintText: 'Enter The FirstName',
+                  hintStyle: TextStyle(color: Colors.white), // Hint text color
+                ),
+              ),
+              const SizedBox(height: 25),
+              TextField(
+                controller: textEditingController1,
+                style: TextStyle(color: Colors.white), // Text color
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Border color
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Border color
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Border color
+                  ),
+                  hintText: 'Enter the LastName',
                   hintStyle: TextStyle(color: Colors.white), // Hint text color
                 ),
               ),
@@ -71,29 +85,36 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               const SizedBox(height: 25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('If you dont have account',style: TextStyle(fontSize: 16,color: Colors.white),),
-                  GestureDetector(
-                    onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Signup(),));
-                          },
-                    child: Text('signup',style: TextStyle(color: Colors.blue),)
-                    )
-                ],
+              TextField(
+                controller: textEditingController2,
+                style: TextStyle(color: Colors.white), // Text color
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Border color
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Border color
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Border color
+                  ),
+                  hintText: 'Enter the confirmpassword',
+                  hintStyle: TextStyle(color: Colors.white), // Hint text color
+                ),
               ),
+              const SizedBox(height: 25),
+              
               ElevatedButton(
                 onPressed: () {
-                  // Handle button press
+                  
                 },
-                child: const Text('Sign in'),
+                child: const Text('SignUp'),
               ),
             ],
           ),
         ),
       ),
+
     );
   }
 }

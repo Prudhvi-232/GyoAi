@@ -17,7 +17,7 @@ class PushedPageS extends StatefulWidget {
 }
 
 class _PushedPageSState extends State<PushedPageS> {
-  late List<dynamic> _data;
+  List<dynamic>? _data; // Make _data nullable
   int _imageHeight = 0;
   int _imageWidth = 0;
   int x = 1;
@@ -25,6 +25,7 @@ class _PushedPageSState extends State<PushedPageS> {
   @override
   void initState() {
     super.initState();
+    _data = []; // Initialize _data here
     var res = loadModel();
     print('Model Response: ' + res.toString());
   }
@@ -61,7 +62,7 @@ class _PushedPageSState extends State<PushedPageS> {
             setRecognitions: _setRecognitions,
           ),
           RenderData(
-            data: _data == null ? [] : _data,
+            data: _data == null ? [] : _data!,
             previewH: max(_imageHeight, _imageWidth),
             previewW: min(_imageHeight, _imageWidth),
             screenH: screen.height,

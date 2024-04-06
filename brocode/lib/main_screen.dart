@@ -68,7 +68,7 @@ class MainScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          Image.asset('assets/align.PNG'),
+          Image.asset('assets/yoga4.PNG'),
           SizedBox(height: 10),
           // Container(
           //   padding: EdgeInsets.only(left: 16.0, right: 16.0),
@@ -108,11 +108,13 @@ class MainScreen extends StatelessWidget {
                             backgroundColor: Colors.white,
                           ),
                           onPressed: () {
-                            print('hello');
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PushedPageS(
+                                    cameras: cameras, title: 'AlignYoga')));
                           },
                           child: Container(
                               padding: EdgeInsets.all(10.0),
-                              child: Image.asset('assets/crunch.PNG')),
+                              child: Image.asset('assets/squat.PNG')),
                         ),
                       ),
                     ],
@@ -129,8 +131,10 @@ class MainScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(18.0)),
                             backgroundColor: Colors.white,
                           ),
-                          onPressed: () {
-                            print('hello');
+                         onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PushedPageA(
+                                    cameras: cameras, title: 'AlignYoga')));
                           },
                           child: Container(
                               padding: EdgeInsets.all(10.0),

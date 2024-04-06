@@ -17,7 +17,7 @@ class PushedPageA extends StatefulWidget {
 }
 
 class _PushedPageAState extends State<PushedPageA> {
-  late List<dynamic> _data;
+  List<dynamic> _data = []; // Initialize _data as an empty list
   int _imageHeight = 0;
   int _imageWidth = 0;
   int x = 1;
@@ -61,7 +61,7 @@ class _PushedPageAState extends State<PushedPageA> {
             setRecognitions: _setRecognitions,
           ),
           RenderDataArmPress(
-            data: _data == null ? [] : _data,
+            data: _data,
             previewH: max(_imageHeight, _imageWidth),
             previewW: min(_imageHeight, _imageWidth),
             screenH: screen.height,
