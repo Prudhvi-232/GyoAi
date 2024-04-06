@@ -18,45 +18,58 @@ class _ProfilePageState extends State<ProfilePage> {
     textEditingController2 = TextEditingController();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "BroCode",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-        ),
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text(
+        "BroCode",
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: textEditingController1,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter the name',
-              ),
+    ),
+    body: Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(
+            controller: textEditingController1,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Enter the name',
             ),
-            const SizedBox(height: 25),
-            TextField(
-              controller: textEditingController2,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter the password',
-              ),
+          ),
+          const SizedBox(height: 25),
+          TextField(
+            controller: textEditingController2,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Enter the password',
             ),
-            const SizedBox(height: 25),
-            ElevatedButton(
-              onPressed: () {
-                // Handle button press
-              },
-              child: const Text("Submit"),
+          ),
+          const SizedBox(height: 25),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              onPrimary: Colors.black,
+              minimumSize: Size(double.infinity, 50),
             ),
-          ],
-        ),
+            icon: Falcon(
+              FontAwesomeIcons.google,
+              color: Colors.red,
+            ),
+            label: Text('Sign Up with Google'),
+            onPressed: signIn,
+          ),
+        ],
       ),
-    );
+    ),
+  );
+  Future signIn() async {
+    await GoogleSignInApi.login();
   }
 }
+
+
+  
+
