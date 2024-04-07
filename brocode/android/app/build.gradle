@@ -52,7 +52,10 @@ android {
 
     signingConfigs {
         debug {
-            
+            keyAlias 'androiddebugkey'
+            keyPassword '200606'
+            storeFile file('mykey.jks')
+            storePassword '200606'
         }
     }
 
@@ -65,7 +68,7 @@ android {
                     'proguard-rules.pro'
         }
         debug {
-            
+            signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
         }

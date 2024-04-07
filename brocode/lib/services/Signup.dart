@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:hacking/ethereum_utils.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
 
   @override
-  State<Signup> createState() => _SignupState();
+  _SignupState createState() => _SignupState();
 }
 
 class _SignupState extends State<Signup> {
   late TextEditingController textEditingController1;
   late TextEditingController textEditingController2;
+  final EthereumUtils _ethUtils = EthereumUtils();
+
   @override
   void initState() {
     super.initState();
     textEditingController1 = TextEditingController();
     textEditingController2 = TextEditingController();
+    _ethUtils.initial(); // Initialize _ethUtils here
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,10 +108,9 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               const SizedBox(height: 25),
-              
               ElevatedButton(
                 onPressed: () {
-                  
+                  _registerToken();
                 },
                 child: const Text('SignUp'),
               ),
@@ -114,7 +118,21 @@ class _SignupState extends State<Signup> {
           ),
         ),
       ),
-
     );
+  }
+
+  Future<void> _registerToken() async {
+    try {
+      // Call the function to register token
+      // For example:
+      // await _ethUtils.registerToken();
+      // Show success message or navigate to the balance screen
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to register token: $e'),
+        ),
+      );
+    }
   }
 }

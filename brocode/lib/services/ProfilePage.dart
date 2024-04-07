@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hacking/api/google_signin_api.dart';
+import 'package:hacking/main.dart';
+import 'package:hacking/main_screen.dart';
 import 'package:hacking/services/Signup.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -10,14 +13,34 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late TextEditingController textEditingController1;
-  late TextEditingController textEditingController2;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  String? errorMessage;
 
   @override
   void initState() {
     super.initState();
-    textEditingController1 = TextEditingController();
-    textEditingController2 = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> signIn() async {
+    try {
+      await GoogleSignInApi.login();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => MainScreen(cameras!)),
+      );
+    } catch (error) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => MainScreen(cameras!)),
+      );
+    }
   }
 
   @override
@@ -26,70 +49,81 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/hof4.jpeg'), // Replace with your image path
+            image: AssetImage('assets/hof4.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller: textEditingController1,
-                style: TextStyle(color: Colors.white), // Text color
+                controller: nameController,
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
+                  hintText: 'Enter Name',
+                  hintStyle: const TextStyle(color: Colors.white),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white), // Border color
+                    borderSide: BorderSide(color: Colors.white),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white), // Border color
+                    borderSide: BorderSide(color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white), // Border color
+                    borderSide: BorderSide(color: Colors.white),
                   ),
-                  hintText: 'Enter the name',
-                  hintStyle: TextStyle(color: Colors.white), // Hint text color
+                  errorText: errorMessage,
                 ),
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 25.0),
               TextField(
-                controller: textEditingController2,
-                style: TextStyle(color: Colors.white), // Text color
+                controller: passwordController,
+                style: const TextStyle(color: Colors.white),
+                obscureText: true,
                 decoration: InputDecoration(
+                  hintText: 'Enter Password',
+                  hintStyle: const TextStyle(color: Colors.white),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white), // Border color
+                    borderSide: BorderSide(color: Colors.white),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white), // Border color
+                    borderSide: BorderSide(color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white), // Border color
+                    borderSide: BorderSide(color: Colors.white),
                   ),
-                  hintText: 'Enter the password',
-                  hintStyle: TextStyle(color: Colors.white), // Hint text color
+                  errorText: errorMessage,
                 ),
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 25.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('If you dont have account',style: TextStyle(fontSize: 16,color: Colors.white),),
+                  Text(
+                    'If you don\'t have an account,',
+                    style: const TextStyle(fontSize: 16.0, color: Colors.white),
+                  ),
                   GestureDetector(
-                    onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Signup(),));
-                          },
-                    child: Text('signup',style: TextStyle(color: Colors.blue),)
-                    )
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Signup()),
+                    ),
+                    child: Text(
+                      'sign up',
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  ),
                 ],
               ),
               ElevatedButton(
-                onPressed: () {
-                  // Handle button press
-                },
-                child: const Text('Sign in'),
+                onPressed: signIn,
+                child: const Text('Sign In'),
               ),
+              if (errorMessage != null)
+                Text(
+                  errorMessage!,
+                  style: const TextStyle(color: Colors.red),
+                ),
             ],
           ),
         ),

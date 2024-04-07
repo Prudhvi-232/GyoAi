@@ -1,29 +1,25 @@
-import 'package:hacking/main.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:hacking/pushed_pageA.dart';
+import 'package:hacking/pushed_pageS.dart';
+import 'package:hacking/pushed_pageY.dart';
 import 'package:hacking/widgets/search_bar.dart';
-
-import 'pushed_pageA.dart';
-import 'pushed_pageS.dart';
-import 'pushed_pageY.dart';
+import 'balanceScreen.dart';
 
 class MainScreen extends StatelessWidget {
   final List<CameraDescription> cameras;
-  MainScreen(this.cameras);
+  final int? balance;
+  
+  MainScreen(this.cameras, {this.balance});
 
   static const String id = 'main_screen';
-  var count = 0;
+
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   title: Text('Align.AI'),
-      //   backgroundColor: Colors.blueAccent,
-      // ),
       body: Column(
-        //mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 50),
@@ -44,13 +40,15 @@ class MainScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
-                      width: 50,
-                      height: 50,
+                      width: 40,
+                      height: 40,
                       child: Container(
-                          child: Image.network(
-                              'https://imgs.search.brave.com/KY3asl3tgCzlBcBE9Y1yvnmTTLQrws3JD1Tdmacexec/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvcHJldmll/dy0xeC85MC80MC9i/aXRjb2luLWNvaW4t/aWNvbi1mbGF0LWNh/cnRvb24tdmVjdG9y/LTE1NTk5MDQwLmpw/Zw')),
+                        child: Image.network(
+                          'https://imgs.search.brave.com/KY3asl3tgCzlBcBE9Y1yvnmTTLQrws3JD1Tdmacexec/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvcHJldmll/dy0xeC85MC80MC9i/aXRjb2luLWNvaW4t/aWNvbi1mbGF0LWNh/cnRvb24tdmVjdG9y/LTE1NTk5MDQwLmpw/Zw',
+                        ),
+                      ),
                     ),
-                    Text('$count')
+                    Text('$balance')
                   ],
                 ),
               ],
@@ -67,16 +65,16 @@ class MainScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
-          Image.asset('assets/yoga4.PNG'),
-          SizedBox(height: 10),
+          
+          Image.asset('assets/align.jpg'),
+          
           // Container(
           //   padding: EdgeInsets.only(left: 16.0, right: 16.0),
           //   child: SizedBox(
           //     child: SearchBar('What pose do you wish to align?'),
           //   ),
           // ),
-          SizedBox(height: 20),
+          
           Container(
             padding: EdgeInsets.only(left: 16.0, right: 16.0),
             child: Text(
